@@ -7,7 +7,7 @@ Syncs two Radarr servers through web API.
 ### Why
 Many Plex servers choke if you try to transcode 4K files. To address this a common approach is to keep a 4k and a 1080/720 version in separate libraries.
 
-Radarr does not support saving files to different folder roots for different quality profiles.  To save 4K files to a separate library in plex you must run two Radarr servers.  This script looks for series with a quality setting of 4k on one server and creates the series on a second server.  
+Radarr does not support saving files to different folder roots for different quality profiles.  To save 4K files to a separate library in plex you must run two Radarr servers.  This script looks for movies with a specific quality setting on one server and creates the movies on a second server.  
 
 
 ### Configuration
@@ -16,7 +16,7 @@ Radarr does not support saving files to different folder roots for different qua
     Example Config.txt:
     ```ini
     [General]
-    # Time to wait between adding new series to a server. This will help reduce the load of the Sync server. 0 to disable. (seconds)
+    # Time to wait between adding new movies to a server. This will help reduce the load of the Sync server. 0 to disable. (seconds)
     wait_between_add = 5
 
     # Full path to log file
@@ -35,18 +35,18 @@ Radarr does not support saving files to different folder roots for different qua
     url = http://127.0.0.1:7879
     key = XXXX-XXXX-XXXX-XXXX-XXXX
 
-    # Only sync series that are in these root folders. ';' (semicolon) separated list. Remove line to disable.
+    # Only sync movies that are in these root folders. ';' (semicolon) separated list. Remove line to disable.
     rootFolders = /Movies
 
     # If this path exists
-    replace_path = /Movies/
+    current_path = /Movies/
     # Replace with this path
     new_path = /Movies4k/
 
     # This is the profile ID the movie will be added to.
     profileId = 5
 
-    # This is the profile ID the series must have on the Master server.
+    # This is the profile ID the movie must have on the Master server.
     profileIdMatch = 4
     ```
  2. Find the profileIdMatch on the Master server. Usually just count starting from Any: #1 SD: #2 etc.... IE: if you use the default HD-1080p proflie that would be #4.

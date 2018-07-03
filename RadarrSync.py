@@ -97,8 +97,8 @@ for movie in radarrMovies.json():
                     for folder in allowedFolders:
                         if not folder in movie['path']:
                             continue
-                if 'replace_path' in server:
-                    path = str(movie['path']).replace(server['replace_path'], server['new_path'])
+                if 'current_path' in server:
+                    path = str(movie['path']).replace(server['current_path'], server['new_path'])
                     logging.debug('Updating movie path from: {0} to {1}'.format(movie['path'], path))
                 else:
                     path = movie['path']
