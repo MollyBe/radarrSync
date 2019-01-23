@@ -134,7 +134,7 @@ for movie in radarrMovies.json():
                         logging.debug('Sleeping for: {0} seconds.'.format(ConfigSectionMap('General')['wait_between_add']))
                         time.sleep(int(ConfigSectionMap('General')['wait_between_add']))
                     r = session.post('{0}/api/movie?apikey={1}'.format(server['url'], server['key']), data=json.dumps(payload))
-                    if (r.status_code == 200):
+                    if (r.status_code == 200 or r.status_code == 201):
                         server['searchid'].append(int(r.json()['id']))
                         logger.info('adding {0} to Radarr {1} server'.format(movie['title'], name))
                     else:
