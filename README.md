@@ -1,11 +1,11 @@
 # Credits
-Thanks to https://github.com/Sperryfreak01/RadarrSync for the initial inspiration that lead to https://github.com/hjone72/RadarrSync MultiServer branch.
+Thanks to https://github.com/Sperryfreak01/RadarrSync for the initial inspiration that lead to https://github.com/hjone72/RadarrSync and then lead to https://github.com/EnorMOZ/RadarrSync.
 
 # RadarrSync
-Syncs two Radarr servers through web API.  
+Syncs movies with a defined resolution in one Radarr to another Radarr server through web API.  
 
 ### Why
-Many Plex servers choke if you try to transcode 4K files. To address this a common approach is to keep a 4k and a 1080/720 version in separate libraries.
+Many Plex servers choke if you try to transcode 4K files and more importantly cannot transcode HDR correctly. To address this we create another library of 1080p content mirrored from 2160p downloads in the master Radarr.
 
 Radarr does not support saving files to different folder roots for different quality profiles.  To save 4K files to a separate library in plex you must run two Radarr servers.  This script looks for movies with a specific quality setting on one server and creates the movies on a second server.  
 
@@ -49,8 +49,8 @@ Radarr does not support saving files to different folder roots for different qua
     # This is the resolution ID the movie must have on the Master server.
     resolutionmatch = r2160P
     ```
- 2. Find the profileIdMatch on the Master server. Usually just count starting from Any: #1 SD: #2 etc.... IE: if you use the default HD-1080p proflie that would be #4.
- 3. Change profileId configuration to what you want the profile to be on the SyncServer. In most cases you will want to use #5.
+ 2. Find the resolutionmatch on the Master server. "r2160p" "r1080P" "r720P".
+ 3. Change profileId configuration to what you want the profile to be on the SyncServer.
 
 
 #### How to Run
