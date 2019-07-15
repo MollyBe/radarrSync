@@ -29,4 +29,4 @@ new_path = /Movies4k/
 profileId = 5
 
 # This is the profile ID the movie must have on the Master server.
-profileIdMatch = 4
+resolutionmatch = r2160P

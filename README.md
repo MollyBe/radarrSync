@@ -46,8 +46,8 @@ Radarr does not support saving files to different folder roots for different qua
     # This is the profile ID the movie will be added to.
     profileId = 5
 
-    # This is the profile ID the movie must have on the Master server.
-    profileIdMatch = 4
+    # This is the resolution ID the movie must have on the Master server.
+    resolutionmatch = r2160P
     ```
  2. Find the profileIdMatch on the Master server. Usually just count starting from Any: #1 SD: #2 etc.... IE: if you use the default HD-1080p proflie that would be #4.
  3. Change profileId configuration to what you want the profile to be on the SyncServer. In most cases you will want to use #5.
