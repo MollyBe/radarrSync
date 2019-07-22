@@ -15,8 +15,14 @@ key = XXXXXXXXXXXXXXXXXX
 
 [SyncServers]
 # Ensure the servers start with 'Radarr_'
-[Radarr_1080p]
+[Radarr_4k]
 url = http://127.0.0.1:7879
+key = XXXXXXXXXXXXXXXXXX
+[Radarr_1080p]
+url = http://127.0.0.1:17879
+key = XXXXXXXXXXXXXXXXXX
+[Radarr_720p]
+url = http://127.0.0.1:27879
 key = XXXXXXXXXXXXXXXXXX
 
 # WIll check if this path exists
@@ -30,4 +36,6 @@ new_path = /Movies4k/
 profileId = 5
 
 # This is the profile ID the movie must have on the Master server.
-resolutionmatch = r2160P
+profileIdMatch = 4
+resolutionMatch = r2160P
+bitrateMatch =
