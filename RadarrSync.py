@@ -37,7 +37,7 @@ elif not os.path.isfile(settingsFilename):
     sys.exit(0)
 Config.read(settingsFilename)
 
-print(ConfigSectionMap('Radarr_4k')['rootfolders'].split(';'))
+print(ConfigSectionMap('Radarr_1080p')['rootfolders'].split(';'))
 
 ########################################################################################################################
 logger = logging.getLogger()

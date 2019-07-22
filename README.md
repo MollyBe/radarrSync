@@ -7,7 +7,9 @@ Syncs movies with a defined resolution in one Radarr to another Radarr server th
 ### Why
 Many Plex servers choke if you try to transcode 4K files and more importantly cannot transcode HDR correctly. To address this we create another library of 1080p content mirrored from 2160p downloads in the master Radarr.
 
-Radarr does not support saving files to different folder roots for different quality profiles.  To save 4K files to a separate library in plex you must run two Radarr servers.  This script looks for movies with a specific quality setting on one server and creates the movies on a second server.  
+Radarr does not support saving files to different folder roots for different quality profiles. I recommend using the attached script - FolderQuality.sh - if you wish to do that.
+
+This script looks for movies with a specific quality setting on one server and create the movies on a second server.
 
 
 ### Configuration

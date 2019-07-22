@@ -15,14 +15,15 @@ key = XXXXXXXXXXXXXXXXXX
 
 [SyncServers]
 # Ensure the servers start with 'Radarr_'
-[Radarr_4k]
+[Radarr_1080p]
 url = http://127.0.0.1:7879
 key = XXXXXXXXXXXXXXXXXX
 
+# WIll check if this path exists
 rootFolders = /Movies
-# If this path exists
+# Current path of Radarr Master
 current_path = /Movies/
-# Replace with this path
+# Replace with this path on the Sync Server
 new_path = /Movies4k/
 
 # This is the profile ID the movie will be added to.
