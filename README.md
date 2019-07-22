@@ -33,9 +33,12 @@ This script looks for movies with a specific quality setting on one server and c
 
     [SyncServers]
     # Ensure the servers start with 'Radarr_'
-    [Radarr_4k]
-    url = http://127.0.0.1:7879
-    key = XXXX-XXXX-XXXX-XXXX-XXXX
+    [Radarr_1080p]
+    url = http://127.0.0.1:17879
+    key = XXXXXXXXXXXXXXXXXX
+    [Radarr_720p]
+    url = http://127.0.0.1:27879
+    key = XXXXXXXXXXXXXXXXXX
 
     # Only sync movies that are in these root folders. ';' (semicolon) separated list. Remove line to disable.
     rootFolders = /Movies
@@ -46,10 +49,12 @@ This script looks for movies with a specific quality setting on one server and c
     new_path = /Movies4k/
 
     # This is the profile ID the movie will be added to.
-    profileId = 5
+    profileIdMatch = 4
+    resolutionMatch = r2160P
+    bitrateMatch =
 
     # This is the resolution ID the movie must have on the Master server.
-    resolutionmatch = r2160P
+    profileId = 1
     ```
  2. Find the resolutionmatch on the Master server. "r2160p" "r1080P" "r720P".
  3. Change profileId configuration to what you want the profile to be on the SyncServer.
