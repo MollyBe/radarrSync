@@ -37,7 +37,7 @@ elif not os.path.isfile(settingsFilename):
     sys.exit(0)
 Config.read(settingsFilename)
 
-print(ConfigSectionMap('Radarr_1080p')['rootfolders'].split(';'))
+print(ConfigSectionMap('Radarr_4k')['rootfolders'].split(';'))
 
 ########################################################################################################################
 logger = logging.getLogger()
@@ -90,7 +90,7 @@ for section in Config.sections():
 
 for movie in radarrMovies.json():
     for name, server in servers.items():
-        if movie['movieFile']['quality']['quality']['resolution'] == str(server['resolutionmatch']):
+        if movie['profileId'] == int(server['profileidmatch']):
             if movie['tmdbId'] not in server['movies']:
                 if 'rootfolders' in server:
                     allowedFolders = server['rootfolders'].split(';')
