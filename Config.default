@@ -1,6 +1,6 @@
 [General]
 # Time to wait between adding new movies to a server. This will help reduce the load of the Sync server. 0 to disable. (seconds)
-wait_between_add = 5
+wait_between_add = 120
 
 # Full path to log file
 log_path = ./Output.txt
@@ -16,13 +16,13 @@ key = XXXXXXXXXXXXXXXXXX
 [SyncServers]
 # Ensure the servers start with 'Radarr_'
 [Radarr_4k]
-url = http://127.0.0.1:7879
-key = XXXXXXXXXXXXXXXXXX
-[Radarr_1080p]
 url = http://127.0.0.1:17879
 key = XXXXXXXXXXXXXXXXXX
-[Radarr_720p]
+[Radarr_1080p]
 url = http://127.0.0.1:27879
+key = XXXXXXXXXXXXXXXXXX
+[Radarr_720p]
+url = http://127.0.0.1:37879
 key = XXXXXXXXXXXXXXXXXX
 
 # WIll check if this path exists
@@ -30,7 +30,7 @@ rootFolders = /Movies
 # Current path of Radarr Master
 current_path = /Movies/
 # Replace with this path on the Sync Server
-new_path = /Movies4k/
+new_path = /Movies/sort
 
 # This is the profile ID the movie will be added to.
 profileIdMatch = 4
@@ -39,3 +39,8 @@ bitrateMatch =
 
 # This is the profile ID the movie must have on the Master server.
 profileId = 1
+
+# This is the resolution ID the movie must have on the Master server.
+profileIdMatch = 4
+resolutionMatch = r2160P
+bitrateMatch =
