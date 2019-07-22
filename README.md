@@ -41,12 +41,12 @@ This script looks for movies with a specific quality setting on one server and c
     key = XXXXXXXXXXXXXXXXXX
 
     # Only sync movies that are in these root folders. ';' (semicolon) separated list. Remove line to disable.
+    # WIll check if this path exists
     rootFolders = /Movies
-
-    # If this path exists
+    # Current path of Radarr Master
     current_path = /Movies/
-    # Replace with this path
-    new_path = /Movies4k/
+    # Replace with this path on the Sync Server
+    new_path = /Movies/sort
 
     # This is the profile ID the movie will be added to.
     profileIdMatch = 4
