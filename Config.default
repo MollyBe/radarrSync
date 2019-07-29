@@ -32,15 +32,10 @@ current_path = /Movies/
 # Replace with this path on the Sync Server
 new_path = /Movies/sort
 
-# This is the profile ID the movie will be added to.
+# Choose one of these qualities the movie must have on the Master server.
 profileIdMatch = 4
 resolutionMatch = r2160P
 bitrateMatch =
 
-# This is the profile ID the movie must have on the Master server.
-profileId = 1
-
-# This is the resolution ID the movie must have on the Master server.
-profileIdMatch = 4
-resolutionMatch = r2160P
-bitrateMatch =
+# This is the profile ID the movie will be added with.
+profileId = 4
