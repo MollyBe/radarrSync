@@ -90,7 +90,7 @@ for section in Config.sections():
 
 for movie in radarrMovies.json():
     for name, server in servers.items():
-        if movie['movieFile']['quality']['quality']['resolution'] == str(server['resolutionmatch']):
+        if movie['movieFile']['quality']['quality']['resolution'] == str(server['bitratematch']):
             if movie['tmdbId'] not in server['movies']:
                 if 'rootfolders' in server:
                     allowedFolders = server['rootfolders'].split(';')

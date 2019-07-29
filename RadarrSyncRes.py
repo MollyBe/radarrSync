@@ -28,12 +28,12 @@ def ConfigSectionMap(section):
     return dict1
 
 Config = configparser.ConfigParser()
-settingsFilename = os.path.join(os.getcwd(), 'Config.txt')
+settingsFilename = os.path.join(os.getcwd(), 'config.txt')
 if args.config:
     settingsFilename = args.config
 elif not os.path.isfile(settingsFilename):
     print("Creating default config. Please edit and run again.")
-    shutil.copyfile(os.path.join(os.getcwd(), 'Config.default'), settingsFilename)
+    shutil.copyfile(os.path.join(os.getcwd(), 'config.default'), settingsFilename)
     sys.exit(0)
 Config.read(settingsFilename)
 
@@ -90,57 +90,58 @@ for section in Config.sections():
 
 for movie in radarrMovies.json():
     for name, server in servers.items():
-        if movie['movieFile']['quality']['quality']['resolution'] == str(server['resolutionmatch']):
-            if movie['tmdbId'] not in server['movies']:
-                if 'rootfolders' in server:
-                    allowedFolders = server['rootfolders'].split(';')
-                    for folder in allowedFolders:
-                        if not folder in movie['path']:
-                            continue
-                if 'current_path' in server:
-                    path = str(movie['path']).replace(server['current_path'], server['new_path'])
-                    logging.debug('Updating movie path from: {0} to {1}'.format(movie['path'], path))
-                else:
-                    path = movie['path']
-                logging.debug('server: {0}'.format(name))
-                logging.debug('title: {0}'.format(movie['title']))
-                logging.debug('qualityProfileId: {0}'.format(server['profileid']))
-                logging.debug('titleSlug: {0}'.format(movie['titleSlug']))
-                images = movie['images']
-                for image in images:
-                    image['url'] = '{0}{1}'.format(radarr_url, image['url'])
-                    logging.debug(image['url'])
-                logging.debug('tmdbId: {0}'.format(movie['tmdbId']))
-                logging.debug('path: {0}'.format(path))
-                logging.debug('monitored: {0}'.format(movie['monitored']))
-
-                payload = {'title': movie['title'],
-                           'qualityProfileId': server['profileid'],
-                           'titleSlug': movie['titleSlug'],
-                           'tmdbId': movie['tmdbId'],
-                           'path': path,
-                           'monitored': movie['monitored'],
-                           'images': images,
-                           'profileId': server['profileid'],
-                           'minimumAvailability': 'released'
-                           }
-
-                logging.debug('payload: {0}'.format(payload))
-                server['newMovies'] += 1
-                if args.whatif:
-                    logging.debug('WhatIf: Not actually adding movie to Radarr {0}.'.format(name))
-                else:
-                    if server['newMovies'] > 0:
-                        logging.debug('Sleeping for: {0} seconds.'.format(ConfigSectionMap('General')['wait_between_add']))
-                        time.sleep(int(ConfigSectionMap('General')['wait_between_add']))
-                    r = session.post('{0}/api/movie?apikey={1}'.format(server['url'], server['key']), data=json.dumps(payload))
-                    if (r.status_code == 200 or r.status_code == 201):
-                        server['searchid'].append(int(r.json()['id']))
-                        logger.info('adding {0} to Radarr {1} server'.format(movie['title'], name))
+        if 'movieFile' in movie:
+            if movie['movieFile']['quality']['quality']['resolution'] == str(server['resolutionmatch']):
+                if movie['tmdbId'] not in server['movies']:
+                    if 'rootfolders' in server:
+                        allowedFolders = server['rootfolders'].split(';')
+                        for folder in allowedFolders:
+                            if not folder in movie['path']:
+                                continue
+                    if 'current_path' in server:
+                        path = str(movie['path']).replace(server['current_path'], server['new_path'])
+                        logging.debug('Updating movie path from: {0} to {1}'.format(movie['path'], path))
                     else:
-                        logger.error('adding {0} to Radarr {1} server failed. Response {2}'.format(movie['title'],name,r.text))
-            else:
-                logging.debug('{0} already in {1} library'.format(movie['title'], name))
+                        path = movie['path']
+                    logging.debug('server: {0}'.format(name))
+                    logging.debug('title: {0}'.format(movie['title']))
+                    logging.debug('qualityProfileId: {0}'.format(server['profileid']))
+                    logging.debug('titleSlug: {0}'.format(movie['titleSlug']))
+                    images = movie['images']
+                    for image in images:
+                        image['url'] = '{0}{1}'.format(radarr_url, image['url'])
+                        logging.debug(image['url'])
+                    logging.debug('tmdbId: {0}'.format(movie['tmdbId']))
+                    logging.debug('path: {0}'.format(path))
+                    logging.debug('monitored: {0}'.format(movie['monitored']))
+
+                    payload = {'title': movie['title'],
+                               'qualityProfileId': server['profileid'],
+                               'titleSlug': movie['titleSlug'],
+                               'tmdbId': movie['tmdbId'],
+                               'path': path,
+                               'monitored': movie['monitored'],
+                               'images': images,
+                               'profileId': server['profileid'],
+                               'minimumAvailability': 'released'
+                               }
+
+                    logging.debug('payload: {0}'.format(payload))
+                    server['newMovies'] += 1
+                    if args.whatif:
+                        logging.debug('WhatIf: Not actually adding movie to Radarr {0}.'.format(name))
+                    else:
+                        if server['newMovies'] > 0:
+                            logging.debug('Sleeping for: {0} seconds.'.format(ConfigSectionMap('General')['wait_between_add']))
+                            time.sleep(int(ConfigSectionMap('General')['wait_between_add']))
+                        r = session.post('{0}/api/movie?apikey={1}'.format(server['url'], server['key']), data=json.dumps(payload))
+                        if (r.status_code == 200 or r.status_code == 201):
+                            server['searchid'].append(int(r.json()['id']))
+                            logger.info('adding {0} to Radarr {1} server'.format(movie['title'], name))
+                        else:
+                            logger.error('adding {0} to Radarr {1} server failed. Response {2}'.format(movie['title'],name,r.text))
+                else:
+                    logging.debug('{0} already in {1} library'.format(movie['title'], name))
 
 for name, server in servers.items():
     if len(server['searchid']):
