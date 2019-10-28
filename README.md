@@ -1,4 +1,5 @@
 # UNSUPPORTED USE AT YOUR OWN RISK !!!
+Should probably try the original https://github.com/Sperryfreak01/RadarrSync
 
 # Credits
 Thanks to https://github.com/Sperryfreak01/RadarrSync for the initial inspiration that lead to https://github.com/hjone72/RadarrSync MultiServer branch.
